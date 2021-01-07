@@ -88,6 +88,7 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
+          <el-button type="text" size="small" @click="updateCatelogHandle(scope.row.brandId)">关联分类</el-button>
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.brandId)">修改</el-button>
           <el-button type="text" size="small" @click="deleteHandle(scope.row.brandId)">删除</el-button>
         </template>
@@ -112,6 +113,8 @@
   export default {
     data () {
       return {
+        cateRelationDialogVisible: false,
+        cateRelationTableData: [],
         dataForm: {
           key: ''
         },
@@ -223,7 +226,24 @@
         }).then(({})=>{
           this.getDataList();
         })
-  }
+  },
+      //关联分类
+      updateCatelogHandle(brandId) {
+        this.cateRelationDialogVisible = true;
+        this.brandId = brandId;
+        this.getCateRelation();
+      },
+      getCateRelation() {
+        this.$http({
+          url: this.$http.adornUrl("/product/categorybrandrelation/catelog/list"),
+          method: "get",
+          params: this.$http.adornParams({
+            brandId: this.brandId
+          })
+        }).then(({ data }) => {
+          this.cateRelationTableData = data.data;
+        });
+      },
     }
   }
 </script>
