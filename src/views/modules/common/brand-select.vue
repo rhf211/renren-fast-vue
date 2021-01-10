@@ -61,6 +61,7 @@ export default {
   mounted() {
     //监听三级分类消息的变化
     this.subscribe = PubSub.subscribe("catPath", (msg, val) => {
+      console.log("监听消息",msg,val);
       this.catId = val[val.length - 1];
       this.getCatBrands();
     });
