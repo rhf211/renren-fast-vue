@@ -26,7 +26,8 @@ export default {
       brands: [
         {
           label: "a",
-          value: 1
+          value: 1,
+          brandName: "sss"
         }
       ],
       brandId: "",
@@ -56,7 +57,9 @@ export default {
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    this.getCatBrands();
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
     //监听三级分类消息的变化
@@ -77,5 +80,5 @@ export default {
   activated() {} //如果页面有keep-alive缓存功能，这个函数会触发
 };
 </script>
-<style scoped>
+<style scoped>
 </style>
